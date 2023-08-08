@@ -106,6 +106,7 @@ public class IntList {
         if (A == null) {
             return B;
         }
+
         while (A.rest != null) {
             temp.first = A.first;
             temp.rest = new IntList();
@@ -113,9 +114,9 @@ public class IntList {
             A = A.rest;
         }
         temp.first = A.first;
-        A = node;
         temp.rest = B;
         temp = tempnode;
+        A = node;
         return temp;
     }
 
