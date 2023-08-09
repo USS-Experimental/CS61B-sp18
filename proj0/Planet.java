@@ -1,6 +1,6 @@
-import java.lang.Math;
-
 public class Planet {
+
+    public static double gravitationalConstant = 6.67e-11;
 
     public double xxPos;
     public double yyPos;
@@ -29,8 +29,12 @@ public class Planet {
     }
 
     public double calcDistance(Planet p) {
-        double x = (this.xxPos - p.xxPos) * (this.xxPos - p.xxPos);
-        double y = (this.yyPos - p.yyPos) * (this.yyPos - p.yyPos);
-        return Math.sqrt(x + y);
+        return Math.sqrt((this.xxPos - p.xxPos) * (this.xxPos - p.xxPos) 
+            + (this.yyPos - p.yyPos) * (this.yyPos - p.yyPos));
+    }
+
+    public double calcForceExertedBy(Planet p) {
+        return gravitationalConstant * this.mass * p.mass 
+            / (this.calcDistance(p) * this.calcDistance(p));
     }
 }
