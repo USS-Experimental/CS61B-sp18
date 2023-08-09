@@ -1,3 +1,5 @@
+import java.lang.Math;
+
 public class Planet {
 
     public double xxPos;
@@ -24,5 +26,11 @@ public class Planet {
         yyVel = p.yyVel;
         mass = p.mass;
         imgFileName = p.imgFileName;
+    }
+
+    public double calcDistance(Planet p) {
+        double x = (this.xxPos - p.xxPos) * (this.xxPos - p.xxPos);
+        double y = (this.yyPos - p.yyPos) * (this.yyPos - p.yyPos);
+        return Math.sqrt(x + y);
     }
 }
