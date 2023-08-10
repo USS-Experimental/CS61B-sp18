@@ -37,4 +37,43 @@ public class Planet {
         return gravitationalConstant * this.mass * p.mass 
             / (this.calcDistance(p) * this.calcDistance(p));
     }
+
+    public double calcForceExertedByX(Planet p) {
+        return this.calcForceExertedBy(p) * (p.xxPos - this.xxPos)
+            / this.calcDistance(p);
+    }
+
+    public double calcForceExertedByY(Planet p) {
+        return this.calcForceExertedBy(p) * (p.yyPos - this.yyPos)
+            / this.calcDistance(p);
+    }
+
+    public double calcNetForceExertedByX(Planet[] p) {
+        double sum = 0;
+        for (Planet s : p) {
+            if (this.equals(s)) {
+                continue;
+            }
+            sum += this.calcForceExertedByX(s);
+        }
+        return sum;
+    }
+
+    public double calcNetForceExertedByY(Planet[] p) {
+        double sum = 0;
+        for (Planet s : p) {
+            if (this.equals(s)) {
+                continue;
+            }
+            sum += this.calcForceExertedByY(s);
+        }
+        return sum;
+    }
+
+    public void update(double dt, double fX, double fY) {
+        this.xxVel += fX / this.mass * dt;
+        this.yyVel += fY / this.mass * dt;
+        this.xxPos += this.xxVel * dt;
+        this.yyPos += this.yyVel * dt;
+    }
 }
