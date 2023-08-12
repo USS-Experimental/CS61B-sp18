@@ -7,7 +7,7 @@ public class Planet {
     /**
      * Define the gravitational constant.
      */
-    public static double gravitationalConstant = 6.67e-11;
+    private static double gravitationalConstant = 6.67e-11;
 
     /**
      * The current x position of the Planet.
@@ -44,7 +44,7 @@ public class Planet {
      */
     public Planet(double xP, double yP, double xV,
               double yV, double m, String img){
-                
+
         xxPos = xP;
         yyPos = yP;
         xxVel = xV;
