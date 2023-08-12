@@ -32,7 +32,7 @@ public class NBody {
             double xV = in.readDouble();
             double yV = in.readDouble();
             double m = in.readDouble();
-            String img = "images/" + in.readString();
+            String img = in.readString();
             p[i] = new Planet(xP, yP, xV, yV, m, img);
         }
 
@@ -55,7 +55,7 @@ public class NBody {
         StdDraw.picture(0, 0, imageToDraw);
 
         for (int i = 0; i < planets.length; i++) {
-            StdDraw.picture(planets[i].xxPos, planets[i].yyPos, planets[i].imgFileName);
+            StdDraw.picture(planets[i].xxPos, planets[i].yyPos, "images/" + planets[i].imgFileName);
         }
 
         StdDraw.enableDoubleBuffering();
@@ -76,7 +76,7 @@ public class NBody {
             StdDraw.picture(0, 0, imageToDraw);
 
             for (int i = 0; i < planets.length; i++) {
-            StdDraw.picture(planets[i].xxPos, planets[i].yyPos, planets[i].imgFileName);
+            StdDraw.picture(planets[i].xxPos, planets[i].yyPos, "images/" + planets[i].imgFileName);
             }
 
             StdDraw.show();
