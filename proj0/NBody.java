@@ -1,4 +1,6 @@
-
+/**
+ * The main method of the NBody project.
+ */
 public class NBody {
 
     /**
@@ -41,17 +43,28 @@ public class NBody {
 
     public static void main(String[] args) {
 
+        /**
+         * Get the info from the StdIO.
+         */
         double T = Double.parseDouble(args[0]);
         double dt = Double.parseDouble(args[1]);
         String filename = args[2];
+        String imageToDraw = "images/starfield.jpg";
 
+        /**
+         * Get the info of Planets from the designated file.
+         */
         Planet[] planets = readPlanets(filename);
         double radius = readRadius(filename);
 
-        String imageToDraw = "images/starfield.jpg";
-
+        /**
+         * Set the radius of the background.
+         */
         StdDraw.setScale(-radius, radius);
 
+        /**
+         * Print the background.
+         */
         StdDraw.picture(0, 0, imageToDraw);
 
         for (int i = 0; i < planets.length; i++) {
@@ -60,30 +73,55 @@ public class NBody {
 
         StdDraw.enableDoubleBuffering();
 
+        /**
+         * Run the program until t reach T.
+         */
         for (double t = 0; t != T; t += dt) {
             double[] xForces = new double[planets.length];
             double[] yForces = new double[planets.length];
 
+            /**
+             * Store the changes of the Planets.
+             */
             for (int i = 0; i < planets.length; i++) {
                 xForces[i] = planets[i].calcNetForceExertedByX(planets);
                 yForces[i] = planets[i].calcNetForceExertedByY(planets);
             }
 
+            /**
+             * Update the data of the Planets.
+             */
             for (int i = 0; i < planets.length; i++) {
                 planets[i].update(dt, xForces[i], yForces[i]);
             }
 
+            /**
+             * Redraw the background.
+             */
             StdDraw.picture(0, 0, imageToDraw);
-
+            
+            /**
+             * Draw the updated Planets.
+             */
             for (int i = 0; i < planets.length; i++) {
-            StdDraw.picture(planets[i].xxPos, planets[i].yyPos, "images/" + planets[i].imgFileName);
+                StdDraw.picture(planets[i].xxPos, planets[i].yyPos, 
+                    "images/" + planets[i].imgFileName);
             }
 
+            /**
+             * Display the background and the updated Planets.
+             */
             StdDraw.show();
 
+            /**
+             * Pause for 10 milliseconds.
+             */
             StdDraw.pause(10);
         }
 
+        /**
+         * Print the info of Planets after running the program.
+         */
         StdOut.printf("%d\n", planets.length);
 
         StdOut.printf("%.2e\n", radius);
