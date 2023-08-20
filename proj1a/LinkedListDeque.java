@@ -1,7 +1,7 @@
 
 public class LinkedListDeque<T> {
 
-    public class Node {
+    private class Node {
 
         public Node prev;
         public T item;
@@ -13,7 +13,7 @@ public class LinkedListDeque<T> {
          * @param i The value of the item.
          * @param n The next Node of this Node.
          */
-        public Node(Node p, T i, Node n) {
+        private Node(Node p, T i, Node n) {
             prev = p;
             item = i;
             next = n;
