@@ -27,8 +27,10 @@ public class ArrayDeque<Type> {
      */
     private void increaseArray(int length) {
         Type[] temp = (Type[]) new Object[length];
-        System.arraycopy(Array, nextFirst - 1, temp, 0, size);
+        System.arraycopy(Array, 0, temp, 0, size);
         Array = temp;
+        nextFirst = Array.length  -1;
+        nextLast = size;
     }
 
     /**
@@ -37,7 +39,10 @@ public class ArrayDeque<Type> {
      */
     private void decreaseArray(int length) {
         Type[] temp = (Type[]) new Object[length];
-        System.arraycopy(Array, nextFirst - 1, temp, 0, size);
+        System.arraycopy(Array, nextFirst + 1, temp, 0, size);
+        Array = temp;
+        nextFirst = Array.length - 1;
+        nextLast = size;
     }
 
     /**
@@ -51,7 +56,7 @@ public class ArrayDeque<Type> {
     }
 
     /**
-     * Add item to the first of the Array.
+     * Add item to the first of the Array, increase the Array when it is not bing enough.
      * @param item The item to add.
      */
     public void addFirst(Type item) {
@@ -61,14 +66,14 @@ public class ArrayDeque<Type> {
         Array[nextFirst] = item;
         size += 1;
         if (nextFirst == 0) {
-            nextFirst = size;
+            nextFirst = Array.length - 1;
         } else {
             nextFirst -= 1;
         }
     }
 
     /**
-     * Add item to the last of the Array.
+     * Add item to the last of the Array, increase the Array when it is not bing enough.
      * @param item The item to add.
      */
     public void addLast(Type item) {
@@ -77,7 +82,7 @@ public class ArrayDeque<Type> {
         }
         Array[nextLast] = item;
         size += 1;
-        if (nextLast == (size - 1)) {
+        if (nextLast == (Array.length - 1)) {
             nextLast = 0;
         } else {
             nextLast += 1;
@@ -114,12 +119,16 @@ public class ArrayDeque<Type> {
      * @return The removed item.
      */
     public Type removeFirst() {
-        if (size < Array.length / 4) {
-            decreaseArray(size / 2);
+        if (nextFirst == Array.length - 1) {
+            nextFirst = -1;
         }
         Type temp = Array[nextFirst + 1];
         Array [nextFirst + 1] = null;
         nextFirst += 1;
+        size -= 1;
+        if (size <= Array.length / 4) {
+            decreaseArray(Array.length / 2);
+        }
         return temp;
     }
 
@@ -128,12 +137,16 @@ public class ArrayDeque<Type> {
      * @return The removed item.
      */
     public Type removeLast() {
-        if (size < Array.length / 4) {
-            decreaseArray(size / 2);
+        if (nextLast == 0) {
+            nextLast = Array.length;
         }
         Type temp = Array[nextLast - 1];
-        Array [nextFirst - 1] = null;
-        nextFirst -= 1;
+        Array [nextLast - 1] = null;
+        nextLast -= 1;
+        size -= 1;
+        if (size <= Array.length / 4) {
+            decreaseArray(Array.length / 2);
+        }
         return temp;
     }
 
