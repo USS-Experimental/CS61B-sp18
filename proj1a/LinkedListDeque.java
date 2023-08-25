@@ -3,9 +3,9 @@ public class LinkedListDeque<T> {
 
     private class Node {
 
-        public Node prev;
-        public T item;
-        public Node next;
+        private Node prev;
+        private T item;
+        private Node next;
 
         /**
          * Constructor of the Node Class.
@@ -36,17 +36,6 @@ public class LinkedListDeque<T> {
     public LinkedListDeque() {
         sentinel = new Node(sentinel, null, sentinel);
         sentinel.next = sentinel;
-    }
-
-    /**
-     * The constructor of the queue.
-     * @param i The item of the first Node.
-     */
-    public LinkedListDeque(T i) {
-        sentinel = new Node(sentinel, null, sentinel);
-        sentinel.next = new Node(sentinel, i, sentinel);
-        sentinel.prev = sentinel.next;
-        size += 1;
     }
 
     /**
@@ -142,7 +131,7 @@ public class LinkedListDeque<T> {
         Node n = sentinel;
         while (index - 1 > 0) {
             n = n.next;
-            index --;
+            index -= 1;
         }
         return n.item;
     }
