@@ -153,6 +153,12 @@ public class LinkedListDeque<T> {
         return getRecursiveHelp(sentinel.next, index);
     }
 
+    /**
+     * The help method of the getRecursive.
+     * @param node The node of the previous node.
+     * @param index The index of the position.
+     * @return The item of the position of the index.
+     */
     private T getRecursiveHelp(Node node, int index) {
         if (index == 0) {
             return node.item;
