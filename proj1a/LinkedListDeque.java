@@ -129,19 +129,6 @@ public class LinkedListDeque<T> {
      * @param index The index of the position.
      * @return The item of the position of the index.
      */
-    public T getRecursive(int index) {
-        if (index >= size) {
-            return null;
-        }
-        sentinel = sentinel.next;
-        return get(index - 1);
-    }
-
-    /**
-     * Get the item of the request position using recursive.
-     * @param index The index of the position.
-     * @return The item of the position of the index.
-     */
     public T get(int index) {
         if (index >= size) {
             return null;
@@ -152,5 +139,35 @@ public class LinkedListDeque<T> {
             index -= 1;
         }
         return n.item;
+    }
+
+    /**
+     * Get the item of the request position using recursive.
+     * @param index The index of the position.
+     * @return The item of the position of the index.
+     */
+    public T getRecursive(int index) {
+        if (index >= size) {
+            return null;
+        }
+        return getRecursiveHelp(sentinel.next, index);
+    }
+
+    private T getRecursiveHelp(Node node, int index) {
+        if (index == 0) {
+            return node.item;
+        } else {
+            return getRecursiveHelp(node.next, index - 1);
+        }
+    }
+
+    public static void main(String[] args){
+        LinkedListDeque<Integer> L = new LinkedListDeque<>();
+        L.addFirst(2);
+        L.addLast(3);
+        L.removeFirst();
+        L.addLast(5);
+        int n = L.getRecursive(1);
+        int k = L.getRecursive(0);
     }
 }
