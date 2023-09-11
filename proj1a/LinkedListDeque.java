@@ -142,13 +142,4 @@ public class LinkedListDeque<T> {
         }
         return n.item;
     }
-
-    public static void main(String args[]) {
-        LinkedListDeque<Integer> L = new LinkedListDeque<>();
-        L.addFirst(1);
-        L.addLast(2);
-        L.addFirst(0);
-        L.addLast(3);
-        int n = L.getRecursive(3);
-    }
 }
