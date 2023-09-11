@@ -160,14 +160,4 @@ public class LinkedListDeque<T> {
             return getRecursiveHelp(node.next, index - 1);
         }
     }
-
-    public static void main(String[] args){
-        LinkedListDeque<Integer> L = new LinkedListDeque<>();
-        L.addFirst(2);
-        L.addLast(3);
-        L.removeFirst();
-        L.addLast(5);
-        int n = L.getRecursive(1);
-        int k = L.getRecursive(0);
-    }
 }
