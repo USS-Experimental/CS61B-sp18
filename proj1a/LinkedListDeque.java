@@ -18,6 +18,11 @@ public class LinkedListDeque<T> {
             item = i;
             next = n;
         }
+
+        private Node(Node p, Node n) {
+            prev = p;
+            next = n;
+        }
     }
 
     /**
@@ -34,8 +39,9 @@ public class LinkedListDeque<T> {
      * The constructor of an empty queue.
      */
     public LinkedListDeque() {
-        sentinel = new Node(sentinel, null, sentinel);
+        sentinel = new Node(null, null);
         sentinel.next = sentinel;
+        sentinel.prev = sentinel;
         size = 0;
     }
 
@@ -44,8 +50,9 @@ public class LinkedListDeque<T> {
      * @param i The item need to add.
      */
     public void addFirst(T i) {
-        sentinel.next = new Node(sentinel, i, sentinel.next);
-        sentinel.next.next.prev = sentinel.next;
+        Node newNode = new Node(sentinel, i, sentinel.next);
+        sentinel.next.prev = newNode;
+        sentinel.next = newNode;
         size += 1;
     }
 
@@ -54,8 +61,9 @@ public class LinkedListDeque<T> {
      * @param i The item need to add.
      */
     public void addLast(T i) {
-        sentinel.prev = new Node(sentinel.prev, i, sentinel);
-        sentinel.prev.prev.next = sentinel.prev;
+        Node newNode = new Node(sentinel.prev, i, sentinel);
+        sentinel.prev.next = newNode;
+        sentinel.prev = newNode;
         size += 1;
     }
 
@@ -121,9 +129,9 @@ public class LinkedListDeque<T> {
      * @param index The index of the position.
      * @return The item of the position of the index.
      */
-    public T get(int index) {
-        if (index == 0) {
-            return sentinel.item;
+    public T getRecursive(int index) {
+        if (index >= size) {
+            return null;
         }
         sentinel = sentinel.next;
         return get(index - 1);
@@ -134,7 +142,10 @@ public class LinkedListDeque<T> {
      * @param index The index of the position.
      * @return The item of the position of the index.
      */
-    public T getRecursive(int index) {
+    public T get(int index) {
+        if (index >= size) {
+            return null;
+        }
         Node n = sentinel;
         while (index > 0) {
             n = n.next;
