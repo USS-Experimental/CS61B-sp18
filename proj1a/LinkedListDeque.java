@@ -136,10 +136,19 @@ public class LinkedListDeque<T> {
      */
     public T getRecursive(int index) {
         Node n = sentinel;
-        while (index - 1 > 0) {
+        while (index > 0) {
             n = n.next;
             index -= 1;
         }
         return n.item;
+    }
+
+    public static void main(String args[]) {
+        LinkedListDeque<Integer> L = new LinkedListDeque<>();
+        L.addFirst(1);
+        L.addLast(2);
+        L.addFirst(0);
+        L.addLast(3);
+        int n = L.getRecursive(3);
     }
 }
