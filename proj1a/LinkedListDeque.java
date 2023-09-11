@@ -147,7 +147,7 @@ public class LinkedListDeque<T> {
             return null;
         }
         Node n = sentinel;
-        while (index > 0) {
+        while (index >= 0) {
             n = n.next;
             index -= 1;
         }
