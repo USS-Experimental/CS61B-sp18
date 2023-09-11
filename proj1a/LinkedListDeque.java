@@ -28,7 +28,7 @@ public class LinkedListDeque<T> {
     /**
      * Store the size of the queue.
      */
-    private int size = 0;
+    private int size;
 
     /**
      * The constructor of an empty queue.
@@ -36,6 +36,7 @@ public class LinkedListDeque<T> {
     public LinkedListDeque() {
         sentinel = new Node(sentinel, null, sentinel);
         sentinel.next = sentinel;
+        size = 0;
     }
 
     /**
@@ -90,6 +91,9 @@ public class LinkedListDeque<T> {
      * @return The removed item.
      */
     public T removeFirst() {
+        if (size == 0) {
+            return null;
+        }
         Node n = sentinel.next;
         sentinel.next.next.prev = sentinel;
         sentinel.next = sentinel.next.next;
@@ -102,6 +106,9 @@ public class LinkedListDeque<T> {
      * @return The removed item.
      */
     public T removeLast() {
+        if (size == 0) {
+            return null;
+        }
         Node n = sentinel.prev;
         sentinel.prev.prev.next = sentinel;
         sentinel.prev = sentinel.prev.prev;
@@ -134,5 +141,12 @@ public class LinkedListDeque<T> {
             index -= 1;
         }
         return n.item;
+    }
+
+    public static void main(String args[]){
+        LinkedListDeque<Integer> L = new LinkedListDeque<>();
+        L.addFirst(1);
+        L.addLast(2);
+        L.printDeque();
     }
 }
