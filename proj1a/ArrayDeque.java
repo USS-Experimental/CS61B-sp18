@@ -119,6 +119,9 @@ public class ArrayDeque<T> {
      * @return The removed item.
      */
     public T removeFirst() {
+        if (size == 0) {
+            return null;
+        }
         if (nextFirst == array.length - 1) {
             nextFirst = -1;
         }
@@ -134,6 +137,9 @@ public class ArrayDeque<T> {
      * @return The removed item.
      */
     public T removeLast() {
+        if (size == 0) {
+            return null;
+        }
         if (nextLast == 0) {
             nextLast = array.length;
         }
