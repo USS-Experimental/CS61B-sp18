@@ -126,9 +126,6 @@ public class ArrayDeque<T> {
         array [nextFirst + 1] = null;
         nextFirst += 1;
         size -= 1;
-        if (size <= array.length / 4) {
-            decreaseArray(array.length / 2);
-        }
         return temp;
     }
 
@@ -144,9 +141,6 @@ public class ArrayDeque<T> {
         array [nextLast - 1] = null;
         nextLast -= 1;
         size -= 1;
-        if (size <= array.length / 4) {
-            decreaseArray(array.length / 2);
-        }
         return temp;
     }
 
