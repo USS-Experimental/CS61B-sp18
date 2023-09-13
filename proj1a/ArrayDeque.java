@@ -22,30 +22,6 @@ public class ArrayDeque<T> {
     private int nextLast;
 
     /**
-     * Increase the size of the Array when the Array is not big enough.
-     * @param length The size after increase.
-     */
-    private void increaseArray(int length) {
-        T[] temp = (T[]) new Object[length];
-        System.arraycopy(array, 0, temp, 0, size);
-        array = temp;
-        nextFirst = array.length - 1;
-        nextLast = size;
-    }
-
-    /**
-     * Decrease the size of the Array when the Array is too long.
-     * @param length The size after decrease.
-     */
-    private void decreaseArray(int length) {
-        T[] temp = (T[]) new Object[length];
-        System.arraycopy(array, nextFirst + 1, temp, 0, size);
-        array = temp;
-        nextFirst = array.length - 1;
-        nextLast = size;
-    }
-
-    /**
      * The constructor of the Array.
      */
     public ArrayDeque() {
@@ -65,11 +41,7 @@ public class ArrayDeque<T> {
         }
         array[nextFirst] = item;
         size += 1;
-        if (nextFirst == 0) {
-            nextFirst = array.length - 1;
-        } else {
-            nextFirst -= 1;
-        }
+        moveFirst();
     }
 
     /**
@@ -82,11 +54,7 @@ public class ArrayDeque<T> {
         }
         array[nextLast] = item;
         size += 1;
-        if (nextLast == (array.length - 1)) {
-            nextLast = 0;
-        } else {
-            nextLast += 1;
-        }
+        moveLast();
     }
 
     /**
@@ -157,5 +125,66 @@ public class ArrayDeque<T> {
      */
     public T get(int index) {
         return array[index + nextFirst];
+    }
+
+    /**
+     * Move the index of nextFirst when add item to first of Array.
+     */
+    private void moveFirst() {
+        if (nextFirst == 0) {
+            nextFirst = array.length - 1;
+        } else {
+            nextFirst -= 1;
+        }
+    }
+
+    /**
+     * Move the index of nextLast when add item to last of Array.
+     */
+    private void moveLast() {
+        if (nextLast == (array.length - 1)) {
+            nextLast = 0;
+        } else {
+            nextLast += 1;
+        }
+    }
+
+    /**
+     * Increase the size of the Array when the Array is not big enough.
+     * @param length The size after increase.
+     */
+    private void increaseArray(int length) {
+        T[] temp = (T[]) new Object[length];
+        System.arraycopy(array, 0, temp, 0, size);
+        array = temp;
+        nextFirst = array.length - 1;
+        nextLast = size;
+    }
+
+    /**
+     * Decrease the size of the Array when the Array is too long.
+     * @param length The size after decrease.
+     */
+    private void decreaseArray(int length) {
+        T[] temp = (T[]) new Object[length];
+        System.arraycopy(array, nextFirst + 1, temp, 0, size);
+        array = temp;
+        nextFirst = array.length - 1;
+        nextLast = size;
+    }
+
+    public static void main(String[] args) {
+        ArrayDeque<Integer> A = new ArrayDeque<>();
+        A.addFirst(1);
+        A.addFirst(1);
+        A.addFirst(1);
+        A.addFirst(1);
+        A.addFirst(1);
+        A.addFirst(1);
+        A.addFirst(1);
+        A.addFirst(1);
+        A.addFirst(1);
+        A.removeFirst();
+        A.removeLast();
     }
 }
