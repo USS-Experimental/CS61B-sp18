@@ -124,7 +124,7 @@ public class ArrayDeque<T> {
      * @return The item of the position of the index.
      */
     public T get(int index) {
-        return array[index + nextFirst];
+        return array[index + nextFirst + 1];
     }
 
     /**
@@ -173,7 +173,7 @@ public class ArrayDeque<T> {
         nextLast = size;
     }
 
-    /*public static void main(String[] args) {
+    public static void main(String[] args) {
         ArrayDeque<Integer> A = new ArrayDeque<>();
         A.addFirst(1);
         A.addFirst(1);
@@ -184,7 +184,6 @@ public class ArrayDeque<T> {
         A.addFirst(1);
         A.addFirst(1);
         A.addFirst(1);
-        A.removeFirst();
-        A.removeLast();
-    }*/
+        int n = A.get(0);
+    }
 }
