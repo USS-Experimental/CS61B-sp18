@@ -23,7 +23,7 @@ public class Palindrome {
      * @return The value true or false.
      */
     public boolean isPalindrome(String word) {
-        return issPalindromeHelp(wordToDeque(word));
+        return isPalindromeHelp(wordToDeque(word));
     }
 
     /**
@@ -31,13 +31,13 @@ public class Palindrome {
      * @param word The Deque contain the letters.
      * @return the value true or false.
      */
-    private boolean issPalindromeHelp(Deque<Character> word) {
+    private boolean isPalindromeHelp(Deque<Character> word) {
         if (word.isEmpty() || word.size() == 1) {
             return true;
         }
         if (word.removeFirst() != word.removeLast()) {
             return false;
         }
-        return issPalindromeHelp(word);
+        return isPalindromeHelp(word);
     }
 }
