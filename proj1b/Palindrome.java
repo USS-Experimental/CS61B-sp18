@@ -20,9 +20,24 @@ public class Palindrome {
     /**
      * Test whether the word is a palindrome.
      * @param word The word need to be tested.
-     * @return The value tue or false.
+     * @return The value true or false.
      */
     public boolean isPalindrome(String word) {
-        return true;
+        return helpIsPalindrome(wordToDeque(word));
+    }
+
+    /**
+     * The help recursive method of isPalindrome.
+     * @param word The Deque contain the letters.
+     * @return the value true or false.
+     */
+    private boolean helpIsPalindrome(Deque<Character> word) {
+        if (word.isEmpty() || word.size() == 1) {
+            return true;
+        }
+        if (word.removeFirst() != word.removeLast()) {
+            return false;
+        }
+        return helpIsPalindrome(word);
     }
 }
